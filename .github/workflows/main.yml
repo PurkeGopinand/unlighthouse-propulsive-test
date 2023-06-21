@@ -1,7 +1,10 @@
-name: Assertions and static report
+name: Build and deploy
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   demo:
@@ -19,12 +22,12 @@ jobs:
         run: npm install -g @unlighthouse/cli puppeteer
 
       - name: Unlighthouse assertions and client
-        run: unlighthouse-ci --site https://staging.propulsivetech.com/ --build-static
+        run: unlighthouse-ci  --root build --site https://staging.propulsivetech.com/ --build-static --urls /
 
       - name: Deploy report to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
-          publish-dir: "./.unlighthouse"
+          publish-dir: "./build"
           production-branch: main
           production-deploy: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
