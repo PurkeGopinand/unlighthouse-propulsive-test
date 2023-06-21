@@ -20,6 +20,9 @@ jobs:
       - name: Unlighthouse assertions and client
         run: unlighthouse-ci --site https://propulsivetech.com/ --build-static
 
+      - name: Echo Vars
+        run: echo ${{ secrets.NETLIFY_AUTH_TOKEN }} -- ${{ secrets.NETLIFY_DEMO_SITE_ID }} -- ${{ secrets.GITHUB_TOKEN }}
+
       - name: Deploy report to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
