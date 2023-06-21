@@ -14,13 +14,16 @@ jobs:
       - name: Install Dependencies
         run: npm add @unlighthouse/cli puppeteer
 
+      - name: Install Global Dependencies
+        run: npm install -g @unlighthouse/cli puppeteer
+
       - name: Unlighthouse assertions and client
         run: unlighthouse-ci --site <your-site> --build-static
 
       - name: Deploy report to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
-          publish-dir: './.unlighthouse'
+          publish-dir: "./.unlighthouse"
           production-branch: main
           production-deploy: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
