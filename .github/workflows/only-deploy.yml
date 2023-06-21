@@ -1,4 +1,4 @@
-name: Assertions and static report
+name: Only deploy - no build
 
 on:
   workflow_dispatch:
