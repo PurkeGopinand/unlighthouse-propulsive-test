@@ -22,12 +22,15 @@ jobs:
         run: npm install -g @unlighthouse/cli puppeteer
 
       - name: Unlighthouse assertions and client
-        run: unlighthouse-ci  --root build --site https://staging.propulsivetech.com/ --build-static --urls /
+        run: unlighthouse-ci --site https://staging.propulsivetech.com/ --build-static --urls /
+
+      - name: Move reports to build folder
+        run: mkdir build && mv ./.unlighthouse/* ./build/
 
       - name: Deploy report to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
-          publish-dir: "./build/.unlighthouse"
+          publish-dir: "./build"
           production-branch: main
           production-deploy: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
