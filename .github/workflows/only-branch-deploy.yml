@@ -4,16 +4,20 @@ on:
   workflow_dispatch:
     inputs:
       website_url:
-        description: "Webisite URL to be used in the workflow"
+        description: "Website URL to be used in the workflow"
+        default: "https://staging.propulsivetech.com"
         required: true
       website_nickname:
-        description: "Webiste Nickname to be used in the workflow"
+        description: "Website Nickname to be used in the workflow"
+        default: "testnickname"
         required: true
       user_name:
         description: "User Name to be used in the workflow"
+        default: "shardul"
         required: true
       user_email:
         description: "User Email to be used in the workflow"
+        default: "shardulgaikwad@gmail.com"
         required: true
       github_branch:
         description: "GitHub Branch Name to be used in the workflow"
@@ -54,15 +58,15 @@ jobs:
         uses: nwtgck/actions-netlify@v1.2
         with:
           publish-dir: "./build"
-          production-branch: ${{ github.event.inputs.github_branch }}
-          production-deploy: true
+          production-branch: main #${{ github.event.inputs.github_branch }}
+          production-deploy: false
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "New Release Deploy from GitHub Actions"
           enable-pull-request-comment: false
           enable-commit-comment: true
           overwrites-pull-request-comment: true
-          github-deployment-environment: production
-          github-deployment-description: "Deployment description from main.yml"
+          #github-deployment-environment: production
+          #github-deployment-description: "Deployment description from main.yml"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_DEMO_SITE_ID }}
